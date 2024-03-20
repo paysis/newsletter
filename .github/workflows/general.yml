@@ -56,6 +56,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.2
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: "17"
       - name: setup-mold
         uses: rui314/setup-mold@v1
       - name: Generate code coverage
