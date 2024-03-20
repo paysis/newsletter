@@ -36,6 +36,10 @@ jobs:
         with:
           components: clippy
       - uses: Swatinem/rust-cache@v2
+      - name: Install Clang
+        uses: egor-tensin/setup-clang@v1
+      - name: setup-mold
+        uses: Warchant/setup-mold@v1
       - name: Linting
         run: cargo clippy -- -D warnings
 
