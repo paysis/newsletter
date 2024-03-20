@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.2
+      - name: Install Clang
+        uses: egor-tensin/setup-clang@v1
+      - name: setup-mold
+        uses: Warchant/setup-mold@v1
+        with:
+          version: 1.1.0
+          make_default: true
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Run tests
@@ -32,14 +39,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.2
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy
-      - uses: Swatinem/rust-cache@v2
       - name: Install Clang
         uses: egor-tensin/setup-clang@v1
       - name: setup-mold
         uses: Warchant/setup-mold@v1
+        with:
+          version: 1.1.0
+          make_default: true
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
       - name: Linting
         run: cargo clippy -- -D warnings
 
@@ -52,6 +62,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.2
+      - name: Install Clang
+        uses: egor-tensin/setup-clang@v1
+      - name: setup-mold
+        uses: Warchant/setup-mold@v1
+        with:
+          version: 1.1.0
+          make_default: true
       - name: Generate code coverage
         run: |
           cargo tarpaulin --verbose --workspace
